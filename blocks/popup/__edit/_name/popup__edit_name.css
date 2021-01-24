@@ -1,0 +1,8 @@
+.popup__edit_name {
+    margin: 50px auto 0;
+}
+@media screen and (max-width: 650px) {
+    .popup__edit_name {
+        margin: 70px auto 0;
+    }
+}

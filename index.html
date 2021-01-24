@@ -8,73 +8,73 @@
 </head>
 <body class="page">
     <header class="header">
-        <img src="images/mesto-white.png" class="logo" alt="Место">
+        <img src="images/mesto-white.svg" class="logo" alt="Место">
     </header>
     <main class="container">
         <section class="profile">
             <div class="profile__info">
                 <img src="images/kusto.jpg" class="profile__avatar" alt="Кусто">
-                <div class="profile__user">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <p class="profile__hobby">Исследователь океана</p>
+                <div class="profile__block">
+                    <div class="profile__user">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <p class="profile__hobby">Исследователь океана</p>
+                    </div>
+                    <button type="button" class="profile__edit-button"><img src="images/edit.svg" class="profile__edit-image" alt="Ручка"></button>
                 </div>
-                <button class="profile__editButton"><img src="images/edit.png" class="profile__editImage" alt="Ручка"></button>
             </div>
-            <button class="profile__addButton"><img src="images/add.png" class="profile__addImage" alt="Плюс"></button>
+            <button type="button" class="profile__add-button"><img src="images/add.svg" class="profile__add-image" alt="Плюс"></button>
         </section>
         <section class="elements">
             <div class="element">
                 <img src="images/krym.jpg" alt="Крым" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Крым</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="images/yalta.jpg" alt="Ялта" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Ялта</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="images/sevastopol.jpg" alt="Севастополь" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Севастополь</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="images/ay-petri.jpg" alt="Ай-Петри" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Ай-Петри</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="images/balaklava.jpg" alt="Балаклава" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Балаклава</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="images/bakhchisaray.jpg" alt="Бахчисарай" class="element__image">
                 <div class="element__name">
                     <h2 class="element__place">Бахчисарай</h2>
-                    <button class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
+                    <button type="button" class="element__like"><img src="images/like-disabled.svg" alt="Лайк" class="element__heart"></button>
                 </div>
             </div>
         </section>
         <section class="popup">
-            <form class="popup__container">
+            <form class="popup__container" name="form-edit">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" placeholder="Имя" class="popup__name">
-                <input type="text" placeholder="О себе" class="popup__hobby">
-                <button type="submit" class="popup__save">
-                    <p class="popup__save-text">Сохранить</p>
-                </button>
-                <button class="popup__close"><img src="images/Close.png" alt="Крестик" class="popup__closeIcon"></button>
+                <input type="text" name="edit-name" placeholder="Имя" class="popup__edit popup__edit_name">
+                <input type="text" name="edit-hobby" placeholder="О себе" class="popup__edit popup__edit_hobby">
+                <button type="submit" class="popup__save">Сохранить</button>
+                <button type="button" class="popup__close"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon"></button>
             </form>
         </section>
     </main>
