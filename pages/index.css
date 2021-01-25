@@ -29,7 +29,5 @@
 @import url("../blocks/popup/__close-icon/popup__close-icon.css");
 @import url("../blocks/popup/__title/popup__title.css");
 @import url("../blocks/popup/__edit/popup__edit.css");
-@import url("../blocks/popup/__edit/_name/popup__edit_name.css");
-@import url("../blocks/popup/__edit/_hobby/popup__edit_hobby.css");
 @import url("../blocks/popup/__save/popup__save.css");
 @import url("../blocks/popup/_opened/popup_opened.css");
