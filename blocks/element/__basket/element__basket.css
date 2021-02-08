@@ -1,0 +1,10 @@
+.element__basket {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    transition: 0.5s;
+}
+.element__basket:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

@@ -1,6 +1,5 @@
-.popup_opened {
+.form_opened {
+    display: flex;
     opacity: 1;
     visibility: visible;
-    display: flex;
-    
 }

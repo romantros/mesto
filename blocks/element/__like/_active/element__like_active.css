@@ -1,14 +1,14 @@
-.element__like {
+.element__like_active {
     width: 22px;
     height: 19px;
     border: none;
     display: flex;
-    background: url(../../../images/like-disabled.svg);
+    background-image: url('../../../../images/like-active.svg');
     padding: 0;
     transition: 0.5s;
     outline-style: none;
 }
-.element__like:hover {
+.element__like_active:hover {
     transition: 0.5s;
     opacity: 0.5;
     cursor: pointer;

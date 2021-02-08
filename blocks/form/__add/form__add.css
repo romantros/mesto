@@ -1,0 +1,17 @@
+.form__add {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    width: 358px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 20px auto 0;
+}
+.form__add:first-of-type {
+    margin: 50px auto 0;
+}
+@media screen and (max-width: 650px) {
+    .form__add {
+        width: 238px;
+    }
+}
