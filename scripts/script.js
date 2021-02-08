@@ -1,41 +1,53 @@
+const profilePopup = document.querySelector('.profile-popup');
+const openPopupBtn = document.querySelector('.profile__edit-button');
+const closePopupBtn = profilePopup.querySelector('.popup__close');
+const profileForm = profilePopup.querySelector('.profile-form');
+const nameInput = profilePopup.querySelector('.popup__input_name');
+const profileName = document.querySelector('.profile__name');
+const hobbyInput = profilePopup.querySelector('.popup__input_hobby');
+const profileHobby = document.querySelector('.profile__hobby');
+const picPopup = document.querySelector('.image-popup__pic'); 
+const titlePopup = document.querySelector('.image-popup__title');
+   
 // редактирование профиля
- overlay = document.querySelector('.popup');
-let openPopupBtn = document.querySelector('.profile__edit-button');
-let closePopupBtn = overlay.querySelector('.popup__close');
-let formElement = overlay.querySelector('.popup__container');
-let nameInput = overlay.querySelector('.popup__edit_name');
-let profileName = document.querySelector('.profile__name');
-let jobInput = overlay.querySelector('.popup__edit_hobby');
-let profileHobby = document.querySelector('.profile__hobby');
 
-
-
-let togglePopup = function(evt) {
-    evt.preventDefault();
-    if(overlay.className === 'popup') {
-        nameInput.value = profileName.textContent;
-        jobInput.value = profileHobby.textContent;
-    }
-    overlay.classList.toggle('popup_opened');
+function togglePopup(popup) {
+  popup.classList.toggle('popup_opened');
 }
 
-let closePopup = function(evt) {
-    if (evt.target === evt.currentTarget) {
-        togglePopup(evt);
-    }
+const toggleProfilePopup = function() {
+    profilePopup.classList.toggle('popup_opened');
 }
+
+function openProfilePopup() {
+  nameInput.value = profileName.textContent;
+  hobbyInput.value = profileHobby.textContent;
+  toggleProfilePopup()
+}
+
+const popups = document.querySelectorAll('.popup')
+
+      popups.forEach((popup) => {
+          popup.addEventListener('click', (evt) => {
+              if (evt.target.classList.contains('popup_opened')) {
+                  togglePopup(popup)
+              }
+              if (evt.target.classList.contains('popup__close')) {
+                togglePopup(popup)
+              }
+          })
+      }) 
 
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
-    profileHobby.textContent = jobInput.value;
-    togglePopup(evt);
+    profileHobby.textContent = hobbyInput.value;
+    toggleProfilePopup(evt);
 }
 
-openPopupBtn.addEventListener('click', togglePopup);
-closePopupBtn.addEventListener('click', togglePopup);
-overlay.addEventListener('click', closePopup);
-formElement.addEventListener('submit', formSubmitHandler);
+openPopupBtn.addEventListener('click', openProfilePopup);
+closePopupBtn.addEventListener('click', toggleProfilePopup);
+profileForm.addEventListener('submit', formSubmitHandler);
 
 // добавление карточки
 
@@ -67,14 +79,14 @@ const initialCards = [
   }
 ]; 
 
-let form = document.querySelector('.form');
-let openFormBtn = document.querySelector('.profile__add-button');
-let closeFormBtn = form.querySelector('.form__close');
-const formElementAdd = form.querySelector('.form__container');
+const addCardPopup = document.querySelector('.new-card-popup');
+const openFormBtn = document.querySelector('.profile__add-button');
+const closeFormBtn = addCardPopup.querySelector('.popup__close');
+const formElementAdd = addCardPopup.querySelector('.add-form');
 
 const containerElements = document.querySelector('.elements');
-const placeInput = form.querySelector('.form__add_place');
-const linkInput = form.querySelector('.form__add_link');
+const placeInput = addCardPopup.querySelector('.popup__input_place');
+const linkInput = addCardPopup.querySelector('.popup__input_link');
 
 
 function render() {
@@ -90,6 +102,7 @@ function getItem(item) {
   const elementPlace = newElement.querySelector('.element__place');
   elementPlace.textContent = item.name;
   elementImage.src = item.link;
+  elementImage.alt = item.name;
   
   const removeBtn = newElement.querySelector('.element__basket');
   removeBtn.addEventListener('click', dlt);
@@ -97,8 +110,9 @@ function getItem(item) {
   const likeBtn = newElement.querySelector('.element__like');
   likeBtn.addEventListener('click', like);
 
-  const imageBtn = newElement.querySelector('.element__image');
-  imageBtn.addEventListener('click', openImage);
+  elementImage.addEventListener('click', () => {
+    openImage(item) 
+  });
 
   return newElement;
   
@@ -113,31 +127,19 @@ function handleAdd(evt) {
   containerElements.prepend(listItem);
   placeInput.value = ''
   linkInput.value = ''
-  toggleForm(evt);
+  toggleAddCardPopup(evt);
 }
 
 render();
 
 
 
-let toggleForm = function(evt) {
-    //evt.preventDefault();
-    if(form.className === 'form') {
-        
-    }
-    form.classList.toggle('form_opened');
+const toggleAddCardPopup = function() {
+  togglePopup(addCardPopup)
 }
 
-let closeForm = function(evt) {
-    if (evt.target === evt.currentTarget) {
-        toggleForm(evt);
-    }
-}
-
-
-openFormBtn.addEventListener('click', toggleForm);
-closeFormBtn.addEventListener('click', toggleForm);
-form.addEventListener('click', closeForm);
+openFormBtn.addEventListener('click', toggleAddCardPopup);
+closeFormBtn.addEventListener('click', toggleAddCardPopup);
 formElementAdd.addEventListener('submit', handleAdd);
 
 // лайки в карточках
@@ -155,49 +157,19 @@ function dlt(event) {
 
 // открытие картинок
 
-let image = document.querySelectorAll('.element__image');
-const togglePopupImage = document.querySelector('.popup-image');
-let pic = togglePopupImage.querySelector('.popup-image__pic');
-let closePopupImageBtn = togglePopupImage.querySelector('.popup-image__close');
+const imagePopup = document.querySelector('.image-popup');
+const closePopupImageBtn = imagePopup.querySelector('.image-popup__close');
 
-function openImage(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.element');
-  const targetTitle = targetItem.querySelector('.element__place');
-  const picPopup = togglePopupImage.querySelector('.popup-image__pic'); 
-  const titlePopup = togglePopupImage.querySelector('.popup-image__title');
-  
-  picPopup.src= targetEl.src;
-  titlePopup.textContent = targetTitle.textContent;
-
-  togglePopupImage.classList.toggle("popup-image_opened");
+function openImage(item) {
+  picPopup.src= item.link;
+  titlePopup.textContent = item.name;
+  togglePopup(imagePopup)
 }
 
 function closeImage() {
-  togglePopupImage.classList.toggle("popup-image_opened");
+  togglePopup(imagePopup)
 }
 
-// let toggleImage = function() {
-//   togglePopupImage.classList.toggle("popup-image_opened");
-  
-// }
-// let popupImageTitle = togglePopupImage.querySelector('.popup-image__title');
-
-// for (let i = 0; i < image.length; i++) {
-//         let toggleImage = function() {
-//           const elementPlace = document.querySelectorAll('.element__place');
-//           togglePopupImage.classList.toggle("popup-image_opened");
-//           pic.src = image[i].src;
-//           popupImageTitle.textContent = elementPlace[i].textContent;
-//         }
-//         image[i].addEventListener('click', toggleImage);
-//    }
-const closePopupImage = function(event) {
-      if (event.target === event.currentTarget) {
-               closeImage(event);
-           }
-       }
-       closePopupImageBtn.addEventListener('click', closeImage);
-       togglePopupImage.addEventListener('click', closePopupImage);
-       
+closePopupImageBtn.addEventListener('click', closeImage);
+     
        

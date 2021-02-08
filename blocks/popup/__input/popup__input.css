@@ -1,4 +1,4 @@
-.popup__edit {
+.popup__input {
     font-weight: 400;
     font-size: 14px;
     line-height: 30px;
@@ -7,11 +7,11 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     margin: 20px auto 0;
 }
-.popup__edit:first-of-type {
+.popup__input:first-of-type {
     margin: 50px auto 0;
 }
 @media screen and (max-width: 650px) {
-    .popup__edit {
+    .popup__input {
         width: 238px;
     }
 }

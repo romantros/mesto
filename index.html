@@ -25,79 +25,32 @@
             <button type="button" class="profile__add-button"><img src="images/add.svg" class="profile__add-image" alt="Плюс"></button>
         </section>
         <section class="elements">
-            <!-- <div class="element">
-                <img src="images/krym.jpg" alt="Крым" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Крым</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div>
-            <div class="element">
-                <img src="images/yalta.jpg" alt="Ялта" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Ялта</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div>
-            <div class="element">
-                <img src="images/sevastopol.jpg" alt="Севастополь" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Севастополь</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div>
-            <div class="element">
-                <img src="images/ay-petri.jpg" alt="Ай-Петри" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Ай-Петри</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div>
-            <div class="element">
-                <img src="images/balaklava.jpg" alt="Балаклава" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Балаклава</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div>
-            <div class="element">
-                <img src="images/bakhchisaray.jpg" alt="Бахчисарай" class="element__image">
-                <div class="element__name">
-                    <h2 class="element__place">Бахчисарай</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-                <img src="images/basket.svg" alt="Корзина" class="element__basket">
-            </div> -->
+            
         </section>
-        <section class="popup">
-            <form class="popup__container" name="form-edit">
+        <section class="popup profile-popup">
+            <form class="popup__form profile-form" name="form-edit">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" name="edit-name" placeholder="Имя" class="popup__edit popup__edit_name">
-                <input type="text" name="edit-hobby" placeholder="О себе" class="popup__edit popup__edit_hobby">
-                <button type="submit" class="popup__save">Сохранить</button>
+                <input type="text" name="edit-name" placeholder="Имя" class="popup__input popup__input_name">
+                <input type="text" name="edit-hobby" placeholder="О себе" class="popup__input popup__input_hobby">
+                <button type="submit" class="popup__save-button">Сохранить</button>
                 <button type="button" class="popup__close"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon"></button>
             </form>
         </section>
-        <section class="form">
-            <form class="form__container" name="form-add">
-                <h2 class="form__title">Новое место</h2>
-                <input type="text" name="add-place" placeholder="Название" class="form__add form__add_place">
-                <input type="text" name="add-link" placeholder="Ссылка на картинку" class="form__add form__add_link">
-                <button type="submit" class="form__save">Создать</button>
-                <button type="button" class="form__close"><img src="images/Close.svg" alt="Крестик" class="form__close-icon"></button>
+        <section class="popup new-card-popup">
+            <form class="popup__form add-form" name="form-add">
+                <h2 class="popup__title">Новое место</h2>
+                <input type="text" name="add-place" placeholder="Название" class="popup__input popup__input_place">
+                <input type="text" name="add-link" placeholder="Ссылка на картинку" class="popup__input popup__input_link">
+                <button type="submit" class="popup__save-button">Создать</button>
+                <button type="button" class="popup__close"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon"></button>
             </form>
         </section>
     </main>
-    <section class="popup-image">
-        <div class="popup-image__container">
-            <img src="#" alt="Картинка" class="popup-image__pic">
-            <h2 class="popup-image__title"></h2>
-            <button type="button" class="popup-image__close"><img src="images/Close.svg" alt="Крестик" class="popup-image__close-icon"></button>
+    <section class="popup image-popup">
+        <div class="image-popup__container">
+            <img src="#" alt="Картинка" class="image-popup__pic">
+            <h2 class="image-popup__title"></h2>
+            <button type="button" class="image-popup__close"><img src="images/Close.svg" alt="Крестик" class="image-popup__close-icon"></button>
         </div>
     </section>
     <template class="template">
