@@ -1,6 +1,5 @@
 const profilePopup = document.querySelector('.profile-popup');
 const openPopupBtn = document.querySelector('.profile__edit-button');
-const closePopupBtn = profilePopup.querySelector('.popup__close');
 const profileForm = profilePopup.querySelector('.profile-form');
 const nameInput = profilePopup.querySelector('.popup__input_name');
 const profileName = document.querySelector('.profile__name');
@@ -16,7 +15,7 @@ function togglePopup(popup) {
 }
 
 const toggleProfilePopup = function() {
-    profilePopup.classList.toggle('popup_opened');
+  togglePopup(profilePopup);
 }
 
 function openProfilePopup() {
@@ -46,7 +45,6 @@ function formSubmitHandler (evt) {
 }
 
 openPopupBtn.addEventListener('click', openProfilePopup);
-closePopupBtn.addEventListener('click', toggleProfilePopup);
 profileForm.addEventListener('submit', formSubmitHandler);
 
 // добавление карточки
@@ -81,9 +79,7 @@ const initialCards = [
 
 const addCardPopup = document.querySelector('.new-card-popup');
 const openFormBtn = document.querySelector('.profile__add-button');
-const closeFormBtn = addCardPopup.querySelector('.popup__close');
 const formElementAdd = addCardPopup.querySelector('.add-form');
-
 const containerElements = document.querySelector('.elements');
 const placeInput = addCardPopup.querySelector('.popup__input_place');
 const linkInput = addCardPopup.querySelector('.popup__input_link');
@@ -139,7 +135,6 @@ const toggleAddCardPopup = function() {
 }
 
 openFormBtn.addEventListener('click', toggleAddCardPopup);
-closeFormBtn.addEventListener('click', toggleAddCardPopup);
 formElementAdd.addEventListener('submit', handleAdd);
 
 // лайки в карточках
@@ -158,7 +153,6 @@ function dlt(event) {
 // открытие картинок
 
 const imagePopup = document.querySelector('.image-popup');
-const closePopupImageBtn = imagePopup.querySelector('.image-popup__close');
 
 function openImage(item) {
   picPopup.src= item.link;
@@ -168,8 +162,4 @@ function openImage(item) {
 
 function closeImage() {
   togglePopup(imagePopup)
-}
-
-closePopupImageBtn.addEventListener('click', closeImage);
-     
-       
+}   
