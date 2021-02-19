@@ -7,61 +7,7 @@ const hobbyInput = profilePopup.querySelector('.popup__input_hobby');
 const profileHobby = document.querySelector('.profile__hobby');
 const picPopup = document.querySelector('.image-popup__pic'); 
 const titlePopup = document.querySelector('.image-popup__title');
-   
-// редактирование профиля
-
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
-  
-}
-
-const toggleProfilePopup = function() {
-  togglePopup(profilePopup);
-  //profilePopup.tabIndex = -1;
-  
-}
-
-function openProfilePopup() {
-  nameInput.value = profileName.textContent;
-  hobbyInput.value = profileHobby.textContent;
-  
-  toggleProfilePopup()
-  
-}
-
-const popups = document.querySelectorAll('.popup')
-
-      popups.forEach((popup) => {
-          popup.addEventListener('click', (evt) => {
-              if (evt.target.classList.contains('popup_opened')) {
-                  togglePopup(popup)
-              }
-              if (evt.target.classList.contains('popup__close')) {
-                togglePopup(popup)
-              }
-          })
-          
-      }) 
-
-      document.addEventListener('keydown', (evt) => {
-        if (evt.key === "Escape" && profilePopup.classList.contains('popup_opened')) {
-            togglePopup(profilePopup)
-        }
-      })           
-
-function formSubmitHandler (evt) {
-    evt.preventDefault(); 
-    profileName.textContent = nameInput.value;
-    profileHobby.textContent = hobbyInput.value;
-    toggleProfilePopup(evt);
-}
-
-openPopupBtn.addEventListener('click', openProfilePopup);
-profileForm.addEventListener('submit', formSubmitHandler);
-
-// добавление карточки
-
-
+const templateElement = document.querySelector('.template').content;
 const initialCards = [
   {
     name: 'Крым',
@@ -89,6 +35,61 @@ const initialCards = [
   }
 ]; 
 
+// редактирование профиля
+function openPopup(popup) {
+  document.addEventListener('keydown', closeByEsc);
+  popup.classList.add('popup_opened');
+}
+function closePopup(popup) {
+  document.removeEventListener('keydown', closeByEsc);
+  popup.classList.remove('popup_opened');
+}
+
+function openProfilePopup() {
+  nameInput.value = profileName.textContent;
+  hobbyInput.value = profileHobby.textContent;
+  
+  openPopup(profilePopup)
+  
+}
+
+const popups = document.querySelectorAll('.popup')
+
+      popups.forEach((popup) => {
+          popup.addEventListener('mousedown', (evt) => {
+              if (evt.target.classList.contains('popup_opened')) {
+                  closePopup(popup)
+              }
+              if (evt.target.classList.contains('popup__close')) {
+                closePopup(popup)
+              }
+          })
+          
+      }) 
+
+      function closeByEsc(evt) {
+        
+        const ESC_CODE = "Escape";
+        if (evt.key === ESC_CODE) {
+          const openedPopup = document.querySelector('.popup_opened');
+          closePopup(openedPopup); 
+        }
+    } 
+
+function submitProfileForm (evt) {
+    evt.preventDefault(); 
+    profileName.textContent = nameInput.value;
+    profileHobby.textContent = hobbyInput.value;
+    closePopup(profilePopup);
+}
+
+openPopupBtn.addEventListener('click', openProfilePopup);
+profileForm.addEventListener('submit', submitProfileForm);
+
+// добавление карточки
+
+
+
 const addCardPopup = document.querySelector('.new-card-popup');
 const openFormBtn = document.querySelector('.profile__add-button');
 const formElementAdd = addCardPopup.querySelector('.add-form');
@@ -98,12 +99,12 @@ const linkInput = addCardPopup.querySelector('.popup__input_link');
 
 
 function render() {
-  const html = initialCards.map(getItem)
-  containerElements.append(...html);
+  const cardsMappedArray = initialCards.map(getItem)
+  containerElements.append(...cardsMappedArray);
 }
 
 function getItem(item) {
-  const templateElement = document.querySelector('.template').content;
+  
   const element = templateElement.querySelector('.element');
   const newElement = element.cloneNode(true);
   const elementImage = newElement.querySelector('.element__image');
@@ -113,10 +114,10 @@ function getItem(item) {
   elementImage.alt = item.name;
   
   const removeBtn = newElement.querySelector('.element__basket');
-  removeBtn.addEventListener('click', dlt);
+  removeBtn.addEventListener('click', deleteCard);
 
   const likeBtn = newElement.querySelector('.element__like');
-  likeBtn.addEventListener('click', like);
+  likeBtn.addEventListener('click', likeCard);
 
   elementImage.addEventListener('click', () => {
     openImage(item) 
@@ -136,34 +137,26 @@ function handleAdd(evt) {
   containerElements.prepend(listItem);
   placeInput.value = ''
   linkInput.value = ''
-  toggleAddCardPopup(evt);
+  closePopup(addCardPopup);
+  const disabledFormElementAdd = document.querySelector('.add-button');
+  disabledFormElementAdd.setAttribute("disabled", true);
+  disabledFormElementAdd.classList.add('popup__save-button_inactive');
 }
 
 render();
 
 
-
-const toggleAddCardPopup = function() {
-  togglePopup(addCardPopup)
-}
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === "Escape" && addCardPopup.classList.contains('popup_opened')) {
-      togglePopup(addCardPopup)
-  }
-}) 
-
-openFormBtn.addEventListener('click', toggleAddCardPopup);
+openFormBtn.addEventListener('click', () => {openPopup(addCardPopup)});
 formElementAdd.addEventListener('submit', handleAdd);
 
 // лайки в карточках
-function like(event) {
+function likeCard(event) {
   const targetEl = event.target;
   targetEl.classList.toggle("element__like_active");
 }
 
 // удаление карточек
-function dlt(event) {
+function deleteCard(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.element');
   targetItem.remove();
@@ -176,15 +169,5 @@ const imagePopup = document.querySelector('.image-popup');
 function openImage(item) {
   picPopup.src= item.link;
   titlePopup.textContent = item.name;
-  togglePopup(imagePopup)
+  openPopup(imagePopup)
 }
-
-function closeImage() {
-  togglePopup(imagePopup)
-}   
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === "Escape" && imagePopup.classList.contains('popup_opened')) {
-      togglePopup(imagePopup)
-  }
-}) 
