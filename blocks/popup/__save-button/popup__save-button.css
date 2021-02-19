@@ -7,7 +7,7 @@
     margin: 48px auto 37px;
     padding: 0;
     display: flex;
-    transition: 0.5s;
+    transition: 0.3s;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -21,6 +21,15 @@
     transition: 0.5s;
     cursor: pointer;
 } 
+.popup__save-button:disabled {
+    color: #B8B8B8;
+    background: #EDEDED;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 @media screen and (max-width: 650px) {
     .popup__save-button {
         width: 238px;

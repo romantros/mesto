@@ -28,19 +28,31 @@
             
         </section>
         <section class="popup profile-popup">
-            <form class="popup__form profile-form" name="form-edit">
+            <form class="popup__form profile-form" name="form-edit" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" name="edit-name" placeholder="Имя" class="popup__input popup__input_name">
-                <input type="text" name="edit-hobby" placeholder="О себе" class="popup__input popup__input_hobby">
+                <fieldset class="popup__input-block">
+                    <input type="text" name="edit-name" id="name-input" placeholder="Имя" class="popup__input popup__input_name" required minlength="2" maxlength="40">
+                    <span class="popup__input-error name-input-error"></span>
+                </fieldset>
+                <fieldset class="popup__input-block">
+                    <input type="text" name="edit-hobby" id="hobby-input" placeholder="О себе" class="popup__input popup__input_hobby" required minlength="2" maxlength="200">
+                    <span class="popup__input-error hobby-input-error"></span>
+                </fieldset>
                 <button type="submit" class="popup__save-button">Сохранить</button>
                 <button type="button" class="popup__close-button"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon popup__close"></button>
             </form>
         </section>
         <section class="popup new-card-popup">
-            <form class="popup__form add-form" name="form-add">
+            <form class="popup__form add-form" name="form-add" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input type="text" name="add-place" placeholder="Название" class="popup__input popup__input_place">
-                <input type="text" name="add-link" placeholder="Ссылка на картинку" class="popup__input popup__input_link">
+                <fieldset class="popup__input-block">
+                    <input type="text" name="add-place" id="place-input" placeholder="Название" class="popup__input popup__input_place" required minlength="2" maxlength="30">
+                    <span class="popup__input-error place-input-error"></span>
+                </fieldset>
+                <fieldset class="popup__input-block">
+                    <input type="url" name="add-link" id="link-input" placeholder="Ссылка на картинку" class="popup__input popup__input_link" required>
+                    <span class="popup__input-error link-input-error"></span>
+                </fieldset>
                 <button type="submit" class="popup__save-button">Создать</button>
                 <button type="button" class="popup__close-button"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon popup__close"></button>
             </form>
@@ -66,6 +78,7 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/validate.js" defer></script>
 </body>
 </html>

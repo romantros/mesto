@@ -12,16 +12,21 @@ const titlePopup = document.querySelector('.image-popup__title');
 
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
+  
 }
 
 const toggleProfilePopup = function() {
   togglePopup(profilePopup);
+  //profilePopup.tabIndex = -1;
+  
 }
 
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   hobbyInput.value = profileHobby.textContent;
+  
   toggleProfilePopup()
+  
 }
 
 const popups = document.querySelectorAll('.popup')
@@ -35,7 +40,14 @@ const popups = document.querySelectorAll('.popup')
                 togglePopup(popup)
               }
           })
+          
       }) 
+
+      document.addEventListener('keydown', (evt) => {
+        if (evt.key === "Escape" && profilePopup.classList.contains('popup_opened')) {
+            togglePopup(profilePopup)
+        }
+      })           
 
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
@@ -108,6 +120,7 @@ function getItem(item) {
 
   elementImage.addEventListener('click', () => {
     openImage(item) 
+    
   });
 
   return newElement;
@@ -133,6 +146,12 @@ render();
 const toggleAddCardPopup = function() {
   togglePopup(addCardPopup)
 }
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === "Escape" && addCardPopup.classList.contains('popup_opened')) {
+      togglePopup(addCardPopup)
+  }
+}) 
 
 openFormBtn.addEventListener('click', toggleAddCardPopup);
 formElementAdd.addEventListener('submit', handleAdd);
@@ -163,3 +182,9 @@ function openImage(item) {
 function closeImage() {
   togglePopup(imagePopup)
 }   
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === "Escape" && imagePopup.classList.contains('popup_opened')) {
+      togglePopup(imagePopup)
+  }
+}) 
