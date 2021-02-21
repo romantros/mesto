@@ -8,6 +8,8 @@ const profileHobby = document.querySelector('.profile__hobby');
 const picPopup = document.querySelector('.image-popup__pic'); 
 const titlePopup = document.querySelector('.image-popup__title');
 const templateElement = document.querySelector('.template').content;
+const ESC_CODE = "Escape";
+const disabledFormElementAdd = document.querySelector('.add-button');
 const initialCards = [
   {
     name: 'Крым',
@@ -69,7 +71,7 @@ const popups = document.querySelectorAll('.popup')
 
       function closeByEsc(evt) {
         
-        const ESC_CODE = "Escape";
+        
         if (evt.key === ESC_CODE) {
           const openedPopup = document.querySelector('.popup_opened');
           closePopup(openedPopup); 
@@ -138,7 +140,7 @@ function handleAdd(evt) {
   placeInput.value = ''
   linkInput.value = ''
   closePopup(addCardPopup);
-  const disabledFormElementAdd = document.querySelector('.add-button');
+  
   disabledFormElementAdd.setAttribute("disabled", true);
   disabledFormElementAdd.classList.add('popup__save-button_inactive');
 }
