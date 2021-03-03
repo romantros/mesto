@@ -79,12 +79,12 @@ const showInputError = (inputElement, errorMessage, validationSettings) => {
     toggleButtonState(inputList, buttonElement, validationSettings);
   };
   
-  const enableValidation = ({formSelector, inputSelector}) => {
-    const formElements = document.querySelectorAll(formSelector);
+  const enableValidation = (validationSettings) => {
+    const formElements = document.querySelectorAll(validationSettings.formSelector);
     const formList = Array.from(formElements);
   
     formList.forEach((formElement) => {
-      setEventListeners(formElement, inputSelector, validationSettings);
+      setEventListeners(formElement, validationSettings.inputSelector, validationSettings);
     });
   };
   
