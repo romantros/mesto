@@ -9,6 +9,7 @@ const hobbyInput = profilePopup.querySelector('.popup__input_hobby');
 const profileHobby = document.querySelector('.profile__hobby');
 const picPopup = document.querySelector('.image-popup__pic'); 
 const titlePopup = document.querySelector('.image-popup__title');
+const disabledFormElementAdd = document.querySelector('.add-button');
 const ESC_CODE = "Escape";
 
 const validationSettings = {
@@ -64,7 +65,7 @@ function openProfilePopup() {
   hobbyInput.value = profileHobby.textContent;
   
   openPopup(profilePopup)
-  
+  //editFormValidator.resetValidation();
 }
 
 const popups = document.querySelectorAll('.popup')
@@ -118,7 +119,7 @@ function render() {
 }
 
 function getItem(item) {
-  const card = new Card(item, openImage)
+  const card = new Card(item, openImage, '.template')
   const newElement = card.generateCard()
   return newElement;
 }
@@ -152,7 +153,8 @@ function openImage(name, link) {
   picPopup.src = link;
   picPopup.alt = name;
   titlePopup.textContent = name;
-  openPopup(imagePopup)
+  const reset = false;
+  openPopup(imagePopup, reset)
 }
 
 const addFormValidator = new FormValidator(validationSettings, formElementAdd);
