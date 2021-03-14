@@ -1,3 +1,5 @@
+import Card from './Card.js';
+import { FormValidator } from './FormValidator.js';
 const profilePopup = document.querySelector('.profile-popup');
 const openPopupBtn = document.querySelector('.profile__edit-button');
 const profileForm = profilePopup.querySelector('.profile-form');
@@ -7,9 +9,19 @@ const hobbyInput = profilePopup.querySelector('.popup__input_hobby');
 const profileHobby = document.querySelector('.profile__hobby');
 const picPopup = document.querySelector('.image-popup__pic'); 
 const titlePopup = document.querySelector('.image-popup__title');
-const templateElement = document.querySelector('.template').content;
 const ESC_CODE = "Escape";
-const disabledFormElementAdd = document.querySelector('.add-button');
+
+const validationSettings = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save-button",
+  inputBlockSelector: ".popup__input-block",
+  inputErrorSelector: ".popup__input-error",
+  inputErrorClass: "popup__input_error",
+  inputErrorActiveClass: "popup__input-error_active",
+  submitButtonInactiveClass: "popup__save-button_inactive"
+};
+
 const initialCards = [
   {
     name: 'Крым',
@@ -101,33 +113,14 @@ const linkInput = addCardPopup.querySelector('.popup__input_link');
 
 
 function render() {
-  const cardsMappedArray = initialCards.map(getItem)
+  const cardsMappedArray = initialCards.map(element => getItem(element))
   containerElements.append(...cardsMappedArray);
 }
 
 function getItem(item) {
-  
-  const element = templateElement.querySelector('.element');
-  const newElement = element.cloneNode(true);
-  const elementImage = newElement.querySelector('.element__image');
-  const elementPlace = newElement.querySelector('.element__place');
-  elementPlace.textContent = item.name;
-  elementImage.src = item.link;
-  elementImage.alt = item.name;
-  
-  const removeBtn = newElement.querySelector('.element__basket');
-  removeBtn.addEventListener('click', deleteCard);
-
-  const likeBtn = newElement.querySelector('.element__like');
-  likeBtn.addEventListener('click', likeCard);
-
-  elementImage.addEventListener('click', () => {
-    openImage(item) 
-    
-  });
-
+  const card = new Card(item, openImage)
+  const newElement = card.generateCard()
   return newElement;
-  
 }
 
 
@@ -151,25 +144,18 @@ render();
 openFormBtn.addEventListener('click', () => {openPopup(addCardPopup)});
 formElementAdd.addEventListener('submit', handleAdd);
 
-// лайки в карточках
-function likeCard(event) {
-  const targetEl = event.target;
-  targetEl.classList.toggle("element__like_active");
-}
-
-// удаление карточек
-function deleteCard(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.element');
-  targetItem.remove();
-}
-
 // открытие картинок
 
 const imagePopup = document.querySelector('.image-popup');
 
-function openImage(item) {
-  picPopup.src= item.link;
-  titlePopup.textContent = item.name;
+function openImage(name, link) {
+  picPopup.src = link;
+  picPopup.alt = name;
+  titlePopup.textContent = name;
   openPopup(imagePopup)
 }
+
+const addFormValidator = new FormValidator(validationSettings, formElementAdd);
+addFormValidator.enableValidation();
+const editFormValidator = new FormValidator(validationSettings, profileForm);
+editFormValidator.enableValidation();
