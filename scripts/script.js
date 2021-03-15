@@ -63,9 +63,9 @@ function closePopup(popup) {
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   hobbyInput.value = profileHobby.textContent;
-  
+  editFormValidator.resetValidation();
   openPopup(profilePopup)
-  //editFormValidator.resetValidation();
+  
 }
 
 const popups = document.querySelectorAll('.popup')
@@ -141,8 +141,13 @@ function handleAdd(evt) {
 
 render();
 
+function openAddCardPopup() {
+  formElementAdd.reset()
+  addFormValidator.resetValidation()
+  openPopup(addCardPopup)
+}
 
-openFormBtn.addEventListener('click', () => {openPopup(addCardPopup)});
+openFormBtn.addEventListener('click', openAddCardPopup);
 formElementAdd.addEventListener('submit', handleAdd);
 
 // открытие картинок
