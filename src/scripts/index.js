@@ -1,5 +1,11 @@
+import '../pages/index.css';
+
 import Card from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
+import UserInfo from './UserInfo.js';
+
 const profilePopup = document.querySelector('.profile-popup');
 const openPopupBtn = document.querySelector('.profile__edit-button');
 const profileForm = profilePopup.querySelector('.profile-form');
@@ -23,30 +29,37 @@ const validationSettings = {
   submitButtonInactiveClass: "popup__save-button_inactive"
 };
 
+const krym = new URL('../images/krym.jpg', import.meta.url);
+const yalta = new URL('../images/yalta.jpg', import.meta.url);
+const sevastopol = new URL('../images/sevastopol.jpg', import.meta.url);
+const ayPetri = new URL('../images/ay-petri.jpg', import.meta.url);
+const balaklava = new URL('../images/balaklava.jpg', import.meta.url);
+const bakhchisaray = new URL('../images/bakhchisaray.jpg', import.meta.url);
+
 const initialCards = [
   {
     name: 'Крым',
-    link: 'images/krym.jpg'
+    link: krym
   },
   {
     name: 'Ялта',
-    link: 'images/yalta.jpg'
+    link: yalta
   },
   {
     name: 'Севастополь',
-    link: 'images/sevastopol.jpg'
+    link: sevastopol
   },
   {
     name: 'Ай-Петри',
-    link: 'images/ay-petri.jpg'
+    link: ayPetri
   },
   {
     name: 'Балаклава',
-    link: 'images/balaklava.jpg'
+    link: balaklava
   },
   {
     name: 'Бахчисарай',
-    link: 'images/bakhchisaray.jpg'
+    link: bakhchisaray
   }
 ]; 
 

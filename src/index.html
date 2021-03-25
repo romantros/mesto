@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
+    <!--<link rel="stylesheet" href="pages/index.css">-->
 </head>
 <body class="page">
     <header class="header">
-        <img src="images/mesto-white.svg" class="logo" alt="Место">
+        <img src="<%=require('./images/mesto-white.svg')%>" class="logo" alt="Место">
     </header>
     <main class="container">
         <section class="profile">
             <div class="profile__info">
-                <img src="images/kusto.jpg" class="profile__avatar" alt="Кусто">
+                <img src="<%=require('./images/kusto.jpg')%>" class="profile__avatar" alt="Кусто">
                 <div class="profile__block">
                     <div class="profile__user">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <p class="profile__hobby">Исследователь океана</p>
                     </div>
-                    <button type="button" class="profile__edit-button"><img src="images/edit.svg" class="profile__edit-image" alt="Ручка"></button>
+                    <button type="button" class="profile__edit-button"><img src="<%=require('./images/edit.svg')%>" class="profile__edit-image" alt="Ручка"></button>
                 </div>
             </div>
-            <button type="button" class="profile__add-button"><img src="images/add.svg" class="profile__add-image" alt="Плюс"></button>
+            <button type="button" class="profile__add-button"><img src="<%=require('./images/add.svg')%>" class="profile__add-image" alt="Плюс"></button>
         </section>
         <section class="elements">
             
@@ -39,7 +39,7 @@
                     <span class="popup__input-error hobby-input-error"></span>
                 </fieldset>
                 <button type="submit" class="popup__save-button">Сохранить</button>
-                <button type="button" class="popup__close-button"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon popup__close"></button>
+                <button type="button" class="popup__close-button"><img src="<%=require('./images/Close.svg')%>" alt="Крестик" class="popup__close-icon popup__close"></button>
             </form>
         </section>
         <section class="popup new-card-popup">
@@ -54,7 +54,7 @@
                     <span class="popup__input-error link-input-error"></span>
                 </fieldset>
                 <button type="submit" class="popup__save-button add-button">Создать</button>
-                <button type="button" class="popup__close-button"><img src="images/Close.svg" alt="Крестик" class="popup__close-icon popup__close"></button>
+                <button type="button" class="popup__close-button"><img src="<%=require('./images/Close.svg')%>" alt="Крестик" class="popup__close-icon popup__close"></button>
             </form>
         </section>
     </main>
@@ -62,7 +62,7 @@
         <div class="image-popup__container">
             <img src="#" alt="Картинка" class="image-popup__pic">
             <h2 class="image-popup__title"></h2>
-            <button type="button" class="image-popup__close"><img src="images/Close.svg" alt="Крестик" class="image-popup__close-icon popup__close"></button>
+            <button type="button" class="image-popup__close"><img src="<%=require('./images/Close.svg')%>" alt="Крестик" class="image-popup__close-icon popup__close"></button>
         </div>
     </section>
     <template class="template">
@@ -72,12 +72,13 @@
                 <h2 class="element__place"></h2>
                 <button type="button" class="element__like"></button>
             </div>
-            <img src="images/basket.svg" alt="Корзина" class="element__basket">
+            <img src="<%=require('./images/basket.svg')%>" alt="Корзина" class="element__basket">
         </div>
     </template>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Mesto Russia. Роман Тростин</p>
     </footer>
-    <script type="module" src="scripts/script.js" defer></script>
+    <!--<script type="module" src="scripts/index.js" defer></script>
+    <script type="module" src="scripts/Card.js" defer></script>-->
 </body>
 </html>
