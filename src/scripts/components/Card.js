@@ -9,8 +9,7 @@ export default class Card {
   _getTemplate() {
     const cardElement = document
       .querySelector(this._template)
-      .content
-      .querySelector('.element')
+      .content.querySelector(".element")
       .cloneNode(true);
 
     return cardElement;
@@ -18,8 +17,8 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    const elementImage = this._element.querySelector('.element__image');
-    const elementPlace = this._element.querySelector('.element__place');
+    const elementImage = this._element.querySelector(".element__image");
+    const elementPlace = this._element.querySelector(".element__place");
     elementPlace.textContent = this._name;
     elementImage.src = this._link;
     elementImage.alt = this._name;
@@ -35,16 +34,18 @@ export default class Card {
 
   _deleteCard() {
     this._element.remove();
-  }  
+  }
 
   _setEventListeners() {
-    this._removeBtn = this._element.querySelector('.element__basket');
-    this._removeBtn.addEventListener('click', () => this._deleteCard());
+    this._removeBtn = this._element.querySelector(".element__basket");
+    this._removeBtn.addEventListener("click", () => this._deleteCard());
 
-    this._likeBtn = this._element.querySelector('.element__like');
-    this._likeBtn.addEventListener('click', () => this._likeCard());
+    this._likeBtn = this._element.querySelector(".element__like");
+    this._likeBtn.addEventListener("click", () => this._likeCard());
 
-    this._elementImage = this._element.querySelector('.element__image');
-    this._elementImage.addEventListener('click', () => this._handleCardClick(this._name, this._link))
+    this._elementImage = this._element.querySelector(".element__image");
+    this._elementImage.addEventListener("click", () =>
+      this._handleCardClick(this._name, this._link)
+    );
   }
 }
