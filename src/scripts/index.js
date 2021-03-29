@@ -1,178 +1,100 @@
 import '../pages/index.css';
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
-import UserInfo from './UserInfo.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import Popup from './components/Popup.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 
-const profilePopup = document.querySelector('.profile-popup');
-const openPopupBtn = document.querySelector('.profile__edit-button');
-const profileForm = profilePopup.querySelector('.profile-form');
-const nameInput = profilePopup.querySelector('.popup__input_name');
-const profileName = document.querySelector('.profile__name');
-const hobbyInput = profilePopup.querySelector('.popup__input_hobby');
-const profileHobby = document.querySelector('.profile__hobby');
-const picPopup = document.querySelector('.image-popup__pic'); 
-const titlePopup = document.querySelector('.image-popup__title');
-const disabledFormElementAdd = document.querySelector('.add-button');
-const ESC_CODE = "Escape";
+import { 
+  profilePopup,
+  openPopupBtn,
+  profileForm,
+  nameInput,
+  hobbyInput,
+  disabledFormElementAdd,
+  validationSettings,
+  initialCards,
+  addCardPopup,
+  openFormBtn,
+  formElementAdd,
+  containerElements,
+  placeInput,
+  linkInput,
+  imagePopup
+ } from './utils/constants.js';
 
-const validationSettings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inputBlockSelector: ".popup__input-block",
-  inputErrorSelector: ".popup__input-error",
-  inputErrorClass: "popup__input_error",
-  inputErrorActiveClass: "popup__input-error_active",
-  submitButtonInactiveClass: "popup__save-button_inactive"
-};
-
-const krym = new URL('../images/krym.jpg', import.meta.url);
-const yalta = new URL('../images/yalta.jpg', import.meta.url);
-const sevastopol = new URL('../images/sevastopol.jpg', import.meta.url);
-const ayPetri = new URL('../images/ay-petri.jpg', import.meta.url);
-const balaklava = new URL('../images/balaklava.jpg', import.meta.url);
-const bakhchisaray = new URL('../images/bakhchisaray.jpg', import.meta.url);
-
-const initialCards = [
-  {
-    name: 'Крым',
-    link: krym
-  },
-  {
-    name: 'Ялта',
-    link: yalta
-  },
-  {
-    name: 'Севастополь',
-    link: sevastopol
-  },
-  {
-    name: 'Ай-Петри',
-    link: ayPetri
-  },
-  {
-    name: 'Балаклава',
-    link: balaklava
-  },
-  {
-    name: 'Бахчисарай',
-    link: bakhchisaray
-  }
-]; 
-
-// редактирование профиля
-function openPopup(popup) {
-  document.addEventListener('keydown', closeByEsc);
-  popup.classList.add('popup_opened');
-}
-function closePopup(popup) {
-  document.removeEventListener('keydown', closeByEsc);
-  popup.classList.remove('popup_opened');
-}
+ const userInfo = new UserInfo({
+  name: ".profile__name",
+  hobby: ".profile__hobby"
+});
 
 function openProfilePopup() {
-  nameInput.value = profileName.textContent;
-  hobbyInput.value = profileHobby.textContent;
+  const { name, hobby } = userInfo.getUserInfo();
+  nameInput.value = name;
+  hobbyInput.value = hobby;
   editFormValidator.resetValidation();
-  openPopup(profilePopup)
-  
+  const openPopup = new Popup(profilePopup)
+  openPopup.open()
 }
 
-const popups = document.querySelectorAll('.popup')
-
-      popups.forEach((popup) => {
-          popup.addEventListener('mousedown', (evt) => {
-              if (evt.target.classList.contains('popup_opened')) {
-                  closePopup(popup)
-              }
-              if (evt.target.classList.contains('popup__close')) {
-                closePopup(popup)
-              }
-          })
-          
-      }) 
-
-      function closeByEsc(evt) {
-        
-        
-        if (evt.key === ESC_CODE) {
-          const openedPopup = document.querySelector('.popup_opened');
-          closePopup(openedPopup); 
-        }
-    } 
-
-function submitProfileForm (evt) {
-    evt.preventDefault(); 
-    profileName.textContent = nameInput.value;
-    profileHobby.textContent = hobbyInput.value;
-    closePopup(profilePopup);
+function submitProfileForm (data) {
+    userInfo.setUserInfo({
+      name: data['edit-name'],
+      hobby: data['edit-hobby']
+    })
+    profileFormPopup.close()
 }
+
+const profileFormPopup = new PopupWithForm(profilePopup, (data) => submitProfileForm(data))
+profileFormPopup.setEventListeners()
+
 
 openPopupBtn.addEventListener('click', openProfilePopup);
-profileForm.addEventListener('submit', submitProfileForm);
 
-// добавление карточки
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, handleCardClick, '.template');
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  }
+}, containerElements);
 
+cardList.renderItems();
 
-
-const addCardPopup = document.querySelector('.new-card-popup');
-const openFormBtn = document.querySelector('.profile__add-button');
-const formElementAdd = addCardPopup.querySelector('.add-form');
-const containerElements = document.querySelector('.elements');
-const placeInput = addCardPopup.querySelector('.popup__input_place');
-const linkInput = addCardPopup.querySelector('.popup__input_link');
-
-
-function render() {
-  const cardsMappedArray = initialCards.map(element => getItem(element))
-  containerElements.append(...cardsMappedArray);
-}
-
-function getItem(item) {
-  const card = new Card(item, openImage, '.template')
-  const newElement = card.generateCard()
-  return newElement;
-}
-
-
-function handleAdd(evt) {
-  evt.preventDefault();
+function submitAddCardForm() {
   const name = placeInput.value;
   const link = linkInput.value;
-  const listItem = getItem({name, link});
-  containerElements.prepend(listItem);
+  const card = new Card({name, link}, handleCardClick, '.template');
+  const cardElement = card.generateCard();
+  containerElements.prepend(cardElement);
   placeInput.value = ''
   linkInput.value = ''
-  closePopup(addCardPopup);
+  const closePopup = new Popup(addCardPopup)
+  closePopup.close()
   
   disabledFormElementAdd.setAttribute("disabled", true);
   disabledFormElementAdd.classList.add('popup__save-button_inactive');
 }
 
-render();
+const addFormPopup = new PopupWithForm(addCardPopup, () => submitAddCardForm())
+addFormPopup.setEventListeners()
 
 function openAddCardPopup() {
   formElementAdd.reset()
   addFormValidator.resetValidation()
-  openPopup(addCardPopup)
+  const openPopup = new Popup(addCardPopup)
+  openPopup.open()
 }
 
 openFormBtn.addEventListener('click', openAddCardPopup);
-formElementAdd.addEventListener('submit', handleAdd);
 
-// открытие картинок
-
-const imagePopup = document.querySelector('.image-popup');
-
-function openImage(name, link) {
-  picPopup.src = link;
-  picPopup.alt = name;
-  titlePopup.textContent = name;
-  const reset = false;
-  openPopup(imagePopup, reset)
+function handleCardClick(name, link) {
+  const openPopupWithImage = new PopupWithImage(name, link, imagePopup)
+  openPopupWithImage.open()
 }
 
 const addFormValidator = new FormValidator(validationSettings, formElementAdd);
